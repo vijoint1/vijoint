@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /config.js
+Disallow: /submit-booking.ts
+Disallow: /*.sql$
+Disallow: /supabase/
+
+Sitemap: https://vijoint.co.za/sitemap.xml

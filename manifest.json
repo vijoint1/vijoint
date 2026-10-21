@@ -1,0 +1,16 @@
+{
+  "name": "VIJOINT Music & Events",
+  "short_name": "VIJOINT",
+  "description": "DJ, MC, sound, lighting, décor, photography and event production in Pretoria, South Africa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03030a",
+  "theme_color": "#03030a",
+  "icons": [
+    {
+      "src": "vijoint-icon.png",
+      "sizes": "618x618",
+      "type": "image/png"
+    }
+  ]
+}
