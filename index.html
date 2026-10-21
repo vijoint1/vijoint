@@ -180,10 +180,11 @@
   .events-list{display:grid; gap:16px;}
   .event-card{display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); padding:20px 24px; background:var(--ink);}
   .event-card>div{min-width:0}.event-card .event-action{flex:0 0 auto;margin-left:20px;padding:10px 15px;border:1px solid var(--gold-dim);color:var(--gold);font-size:12px;font-weight:700;text-transform:uppercase}.event-card .event-action:hover{background:var(--gold);color:#111}
+  .event-card .event-info{flex:1 1 auto}.event-card .event-poster{flex:0 0 auto;margin-right:20px;display:block}.event-card .event-poster img{display:block;width:120px;max-height:170px;object-fit:cover;border:1px solid var(--line)}.event-card .venue{color:var(--text);font-weight:600}
   .event-card .date{color:var(--gold); font-weight:700; font-size:14px;}
   .event-card h4{font-size:17px; margin-top:4px;}
   .event-card p{color:var(--muted); font-size:14px;}
-  @media(max-width:600px){.event-card{align-items:flex-start;flex-direction:column;gap:14px}.event-card .event-action{margin-left:0}}
+  @media(max-width:600px){.event-card{align-items:flex-start;flex-direction:column;gap:14px}.event-card .event-action{margin-left:0}.event-card .event-poster{margin-right:0;width:100%}.event-card .event-poster img{width:100%;max-width:300px;max-height:none}}
 
   /* Booking form */
   form{display:grid; gap:18px; max-width:680px;}
@@ -256,7 +257,7 @@
   .brand-lockup{display:flex;align-items:center;gap:14px}.brand-logo-frame{width:68px;height:68px;flex:0 0 68px;display:block;overflow:hidden;border:1px solid rgba(37,217,255,.65);border-radius:50%;background:#020208;box-shadow:0 0 18px rgba(37,217,255,.5),0 0 30px rgba(123,77,255,.3)}.brand-logo{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:center center}
   .brand-name{font-size:25px;background:linear-gradient(90deg,#25d9ff 0%,#f7f8ff 48%,#9b6cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 18px rgba(37,217,255,.25);letter-spacing:.035em}
   .brand-sub{color:#d9ddff;letter-spacing:.22em}
-  @media(max-width:600px){.brand-logo-frame{width:58px;height:58px;flex-basis:58px}.brand-name{font-size:21px}.brand-sub{font-size:9px}}
+  @media(max-width:600px){.brand-logo-frame{width:58px;height:58px;flex-basis:58px}.brand-name{font-size:21px}.brand-sub{font-size:9px;letter-spacing:.12em}}
   .gallery-folder,.event-card,.person-contact{border-color:transparent;box-shadow:0 14px 34px rgba(0,0,0,.22)}.gallery-folder:hover{border-color:var(--gold);box-shadow:0 16px 34px rgba(28,18,110,.38),0 0 22px rgba(37,217,255,.16)}.section-head{border:0}
   .skip-link{position:absolute;top:-100px;left:12px;z-index:200;background:var(--gold);color:#05050c;padding:12px 18px;border-radius:4px;font-weight:700;transition:top .2s;}
   .skip-link:focus{top:12px;}
@@ -289,7 +290,7 @@
         <span class="brand-logo-frame"><img class="brand-logo" src="vijoint-icon.png" alt="VIJOINT logo"></span>
         <div>
           <div class="brand-name">VIJOINT</div>
-          <div class="brand-sub">MUSIC &amp; EVENTS</div>
+          <div class="brand-sub">SOUND · STYLE · EXPERIENCE</div>
         </div>
       </div>
       <button class="navbtn" id="navbtn" type="button" aria-expanded="false" aria-controls="navlinks" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
@@ -749,7 +750,7 @@ async function loadEvents(){
     const date=new Date(event.event_date+'T00:00:00');
     const dateText=date.toLocaleDateString('en-ZA',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
     const timeText=event.event_time?event.event_time.slice(0,5):'';
-    return `<article class="event-card"><div><div class="date">${escapeHtml(dateText)}${timeText?' · '+escapeHtml(timeText):''}</div><h4>${escapeHtml(event.title)}</h4><p>${escapeHtml(event.venue||'Venue to be announced')}${event.description?' · '+escapeHtml(event.description):''}</p></div>${event.event_url?`<a class="event-action" href="${escapeHtml(event.event_url)}" target="_blank" rel="noopener">Event details →</a>`:''}</article>`
+    return `<article class="event-card">${event.poster_url?`<a class="event-poster" href="${escapeHtml(event.poster_url)}" target="_blank" rel="noopener"><img src="${escapeHtml(event.poster_url)}" alt="${escapeHtml(event.title)} poster" loading="lazy"></a>`:''}<div class="event-info"><div class="date">${escapeHtml(dateText)}${timeText?' · '+escapeHtml(timeText):''}</div><h4>${escapeHtml(event.title)}</h4><p class="venue">📍 ${escapeHtml(event.venue||'Venue to be announced')}</p>${event.description?`<p>${escapeHtml(event.description)}</p>`:''}</div>${event.event_url?`<a class="event-action" href="${escapeHtml(event.event_url)}" target="_blank" rel="noopener">Event details →</a>`:''}</article>`
   }).join('');
 }
 
